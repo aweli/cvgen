@@ -5,31 +5,27 @@
         <div class="container">
             {{ form_start(form) }}
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-            </div>
+            <p>You'll be able to access your personal cv
+                at {{ url('candidacy', {'identifier' : 'example-identifier'}) }}</p>
 
-            <div class="form-group">
+            {{ form_row(form.identifier) }}
             {{ form_row(form.firstName) }}
-            </div>
             {{ form_row(form.lastName) }}
             {{ form_row(form.email) }}
-            {{ form_row(form.personalDescription) }}
-            {{ form_row(form.company) }}
-
+            {{ form_row(form.github) }}
+            {{ form_row(form.skype) }}
+            <hr/>
+            {{ form_row(form.document) }}
+            <hr/>
             <ul id="skill-fields-list"
-                data-prototype="{{ form_widget(form.skills.vars.prototype)|e }}">
+                data-prototype="{{ form_widget(form.skills.vars.prototype)|e }}<hr/>">
 
-                {% for skillField in form.skills %}
-                    <li>
-                        {{ form_errors(skillField) }}
-                        {{ form_widget(skillField) }}
-                    </li>
-                {% endfor %}
+                {{ form_row(form.skills) }}
             </ul>
 
-            <a href="#" id="add-another-skill">Add skill</a>
+            <p>
+                <a href="javascript:;" id="add-another-skill">Add skill</a>
+            </p>
 
             <button type="submit" title="Save">Save</button>
 
@@ -46,5 +42,5 @@
 
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
             integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc=" crossorigin="anonymous"></script>
-    <script src="/app.js"></script>
+    <script src="/js/app.js"></script>
 {% endblock %}

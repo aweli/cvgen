@@ -2,23 +2,25 @@
 
 {% block stylesheets %}
     <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
     <link href="/css/main.css" type="text/css" rel="stylesheet"/>
 {% endblock %}
 
 {% block body %}
+    {% set document = candidacy.document %}
 
     <header>
         <p>
             <img src="/images/alexwerffeli.jpg" alt="Alex Werffeli">
         </p>
-        <h1>{#@todo: title {{ candidacy.title }}#}</h1>
-        <h2 class="header-blue">{#@todo: subtitle{{ candidacy.subTitle }}#}<</h2>
+        <h1>Hi {{ document.company }}, {{ document.title }}</h1>
+        <h2 class="header-blue">{{ document.subTitle }}</h2>
     </header>
     </header>
 
     <section id="about">
-        {{ candidacy.personalDescription | nl2br }}
+        {{ document.intro|striptags('<a>')|raw }}
     </section>
 
     <section id="skillset">
@@ -31,14 +33,26 @@
     </section>
 
     <section id="contact">
-        <h2>Contact me.</h2>
-        <a href="mailto:{{ candidacy.email }}">{{ candidacy.email }}</a>
+
+        {{ document.outro|striptags('<h2><p><a>') | raw | nl2br }}
+
+        <div class="contact-links">
+            <a href="mailto:{{ candidacy.email }}">
+                <i class="fa fa-envelope-square fa-3x"></i>
+            </a>
+            <a href="https://github.com/{{ candidacy.github }}" target="_blank">
+                <i class="fa fa-github fa-3x"></i>
+            </a>
+            <a href="skype:{{ candidacy.skype }}?call">
+                <i class="fa fa-skype fa-3x"></i>
+            </a>
+        </div>
+
     </section>
 
     <footer>
         <p>
-            <sup>*</sup> Want to see how I work? Check out <a href="https://github.com/awerffeli/cvgen" target="_blank">https://github.com/awerffeli/cvgen</a>
-            where you can find raw source for this application.
+            <sup>*</sup> {{ document.footnote|striptags('<a>')|raw }}
         </p>
     </footer>
 

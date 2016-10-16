@@ -24,6 +24,13 @@ class Candidacy
     /**
      * @var string
      *
+     * @ORM\Column(name="identifier", type="string", length=255, unique=true, nullable=false)
+     */
+    private $identifier;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="firstName", type="string", length=255)
      */
     private $firstName;
@@ -45,16 +52,23 @@ class Candidacy
     /**
      * @var string
      *
-     * @ORM\Column(name="personalDescription", type="text", nullable=true)
+     * @ORM\Column(name="skype", type="string", length=255)
      */
-    private $personalDescription;
+    private $skype;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="company", type="string", nullable=true)
+     * @ORM\Column(name="github", type="string", length=255)
      */
-    private $company;
+    private $github;
+
+    /**
+     * @var Document
+     *
+     * @ORM\OneToOne(targetEntity="Document", mappedBy="candidacy", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $document;
 
     /**
      * Enable cascade persist and remove so skills will be persisted and removed automatically when saving Candidacy.
@@ -74,6 +88,22 @@ class Candidacy
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+
+    /**
+     * @param string $identifier
+     */
+    public function setIdentifier(string $identifier)
+    {
+        $this->identifier = $identifier;
     }
 
     /**
@@ -149,51 +179,43 @@ class Candidacy
     }
 
     /**
-     * Set personalDescription
-     *
-     * @param string $personalDescription
-     *
-     * @return Candidacy
-     */
-    public function setPersonalDescription($personalDescription)
-    {
-        $this->personalDescription = $personalDescription;
-
-        return $this;
-    }
-
-    /**
-     * Get personalDescription
+     * Get skype
      *
      * @return string
      */
-    public function getPersonalDescription()
+    public function getSkype()
     {
-        return $this->personalDescription;
+        return $this->skype;
     }
 
     /**
-     * Set company
+     * Set skype
      *
-     * @param string $company
-     *
-     * @return Candidacy
+     * @param string $skype
      */
-    public function setCompany($company)
+    public function setSkype(string $skype)
     {
-        $this->company = $company;
-
-        return $this;
+        $this->skype = $skype;
     }
 
     /**
-     * Get company
+     * Get github
      *
      * @return string
      */
-    public function getCompany()
+    public function getGithub()
     {
-        return $this->company;
+        return $this->github;
+    }
+
+    /**
+     * Set gitbub
+     *
+     * @param string $github
+     */
+    public function setGithub(string $github)
+    {
+        $this->github = $github;
     }
 
     /**
@@ -236,5 +258,27 @@ class Candidacy
     {
         return $this->skills;
     }
+
+    /**
+     * @return Document
+     */
+    public function getDocument()
+    {
+        return $this->document;
+    }
+
+    /**
+     * @param Document $document
+     *
+     * @return $this
+     */
+    public function setDocument(Document $document)
+    {
+        $document->setCandidacy($this);
+        $this->document = $document;
+
+        return $this;
+    }
+
 }
 

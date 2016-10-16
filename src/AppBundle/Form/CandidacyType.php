@@ -16,11 +16,13 @@ class CandidacyType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('identifier')
             ->add('firstName')
             ->add('lastName')
             ->add('email')
-            ->add('personalDescription')
-            ->add('company')
+            ->add('github')
+            ->add('skype')
+            ->add('document', DocumentType::class)
             ->add('skills', CollectionType::class, [
                 'entry_type' => SkillType::class,
                 'allow_add' => true,

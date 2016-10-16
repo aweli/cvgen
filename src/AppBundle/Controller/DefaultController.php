@@ -30,21 +30,22 @@ class DefaultController extends Controller
 
         $em = $this->getEntityManager();
 
+        /** @var Candidacy $candidacy */
         $candidacy = $form->getData();
         $em->persist($candidacy);
         $em->flush();
 
         //@todo: redirect to cv page
-        return $this->redirectToRoute('admin');
+        return $this->redirectToRoute('candidacy', ['identifier' => $candidacy->getIdentifier()]);
     }
 
     /**
-     * @Route("/{company}", name="home")
+     * @Route("/{identifier}", name="candidacy")
      */
-    public function candidacyAction(Request $request, $company)
+    public function candidacyAction(Request $request, $identifier)
     {
         $repo = $this->getEntityManager()->getRepository('AppBundle:Candidacy');
-        $candidacy = $repo->findOneBy(['company' => $company]);
+        $candidacy = $repo->findOneBy(['identifier' => $identifier]);
 
         return $this->render('default/candidacy.html.twig', [
             'candidacy' => $candidacy,
