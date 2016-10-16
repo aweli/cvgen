@@ -1,5 +1,45 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
+
+    <link href="/css/main.css" type="text/css" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
+
+    <header>
+        <p>
+            <img src="/images/alexwerffeli.jpg" alt="Alex Werffeli">
+        </p>
+        <h1>{#@todo: title {{ candidacy.title }}#}</h1>
+        <h2 class="header-blue">{#@todo: subtitle{{ candidacy.subTitle }}#}<</h2>
+    </header>
+    </header>
+
+    <section id="about">
+        {{ candidacy.personalDescription | nl2br }}
+    </section>
+
+    <section id="skillset">
+        <h2>Skillset</h2>
+
+        {% for skill in candidacy.skills %}
+            <h3>{{ skill.name }}</h3>
+            <div class="skill-level-bar skill-level-{{ (skill.percentage / 10) | round }}"></div>
+        {% endfor %}
+    </section>
+
+    <section id="contact">
+        <h2>Contact me.</h2>
+        <a href="mailto:{{ candidacy.email }}">{{ candidacy.email }}</a>
+    </section>
+
+    <footer>
+        <p>
+            <sup>*</sup> Want to see how I work? Check out <a href="https://github.com/awerffeli/cvgen" target="_blank">https://github.com/awerffeli/cvgen</a>
+            where you can find raw source for this application.
+        </p>
+    </footer>
 
 {% endblock %}
