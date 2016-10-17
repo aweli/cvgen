@@ -3,12 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Candidacy
  *
  * @ORM\Table(name="candidacy")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CandidacyRepository")
+ * @UniqueEntity("identifier")
  */
 class Candidacy
 {
@@ -45,21 +47,21 @@ class Candidacy
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255)
+     * @ORM\Column(name="email", type="string", length=255, nullable=true)
      */
     private $email;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="skype", type="string", length=255)
+     * @ORM\Column(name="skype", type="string", length=255, nullable=true)
      */
     private $skype;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="github", type="string", length=255)
+     * @ORM\Column(name="github", type="string", length=255, nullable=true)
      */
     private $github;
 

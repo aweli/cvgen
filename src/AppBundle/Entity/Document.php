@@ -24,7 +24,7 @@ class Document
     /**
      * @var string
      *
-     * @ORM\Column(name="company", type="string", length=255)
+     * @ORM\Column(name="company", type="string", length=255,  nullable=true)
      */
     private $company;
 
@@ -45,28 +45,28 @@ class Document
     /**
      * @var string
      *
-     * @ORM\Column(name="Intro", type="text")
+     * @ORM\Column(name="intro", type="text")
      */
     private $intro;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Outro", type="text")
+     * @ORM\Column(name="outro", type="text")
      */
     private $outro;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="Footnote", type="text")
+     * @ORM\Column(name="footnote", type="text", nullable=true)
      */
     private $footnote;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="imageUrl", type="string", length=255)
+     * @ORM\Column(name="imageUrl", type="string", length=255, nullable=true)
      */
     private $imageUrl;
 
