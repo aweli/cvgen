@@ -22,7 +22,9 @@ class CandidacyType extends AbstractType
             ->add('email')
             ->add('github')
             ->add('skype')
-            ->add('document', DocumentType::class)
+            ->add('document', DocumentType::class, [
+                'label' => false,
+            ])
             ->add('skills', CollectionType::class, [
                 'entry_type' => SkillType::class,
                 'allow_add' => true,
