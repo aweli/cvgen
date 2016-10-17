@@ -50,6 +50,10 @@ class DefaultController extends Controller
         $repo = $this->getEntityManager()->getRepository('AppBundle:Candidacy');
         $candidacy = $repo->findOneBy(['identifier' => $identifier]);
 
+        if (null === $candidacy) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render('default/candidacy.html.twig', [
             'candidacy' => $candidacy,
         ]);
