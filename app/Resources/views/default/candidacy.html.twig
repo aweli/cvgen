@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% set document = candidacy.document %}
 
-{% block title %}Hi {{ document.company }}, {{ document.title }}{% endblock %}
+{% block title %}Hi{% if document.company %} {{ document.company }}{% endif %}, {{ document.title }}{% endblock %}
 
 {% block description %}{{ document.subTitle }}{% endblock %}
 
@@ -14,12 +14,12 @@
 
 {% block body %}
     <header>
-        <h1>Hi {{ document.company }}, {{ document.title }}</h1>
+        <h1>Hi{% if document.company %} {{ document.company }}{% endif %}, {{ document.title }}</h1>
         <h2 class="header-blue">{{ document.subTitle }}</h2>
     </header>
 
     <section id="about">
-        <img class="portrait" src="/images/alexwerffeli.jpg" alt="Alex Werffeli">
+        <img class="portrait" src="{{ document.imageUrl }}" alt="{{ candidacy.firstName }} {{ candidacy.lastName }}">
 
         {{ document.intro|striptags('<a>')|raw|nl2br }}
     </section>
@@ -38,15 +38,21 @@
         {{ document.outro|striptags('<h2><p><a>') | raw | nl2br }}
 
         <div class="contact-links">
+            {% if  candidacy.email %}
             <a href="mailto:{{ candidacy.email }}">
                 <i class="fa fa-envelope-square fa-3x"></i>
             </a>
+            {% endif %}
+            {% if  candidacy.github %}
             <a href="https://github.com/{{ candidacy.github }}" target="_blank">
                 <i class="fa fa-github fa-3x"></i>
             </a>
+            {% endif %}
+            {% if  candidacy.skype %}
             <a href="skype:{{ candidacy.skype }}?call">
                 <i class="fa fa-skype fa-3x"></i>
             </a>
+            {% endif %}
         </div>
 
     </section>
