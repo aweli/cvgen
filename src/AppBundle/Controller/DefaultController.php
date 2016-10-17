@@ -41,11 +41,18 @@ class DefaultController extends Controller
 
     /**
      * @Route("/{identifier}", name="candidacy")
+     * @param Request $request
+     * @param string $identifier
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function candidacyAction(Request $request, $identifier)
+    public function candidacyAction(Request $request, $identifier = 'default')
     {
         $repo = $this->getEntityManager()->getRepository('AppBundle:Candidacy');
         $candidacy = $repo->findOneBy(['identifier' => $identifier]);
+
+        if (null === $candidacy) {
+            throw $this->createNotFoundException();
+        }
 
         return $this->render('default/candidacy.html.twig', [
             'candidacy' => $candidacy,
