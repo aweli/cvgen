@@ -1,4 +1,9 @@
 {% extends 'base.html.twig' %}
+{% set document = candidacy.document %}
+
+{% block title %}Hi {{ document.company }}, {{ document.title }}{% endblock %}
+
+{% block description %}{{ document.subTitle }}{% endblock %}
 
 {% block stylesheets %}
     <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
@@ -8,19 +13,15 @@
 {% endblock %}
 
 {% block body %}
-    {% set document = candidacy.document %}
-
     <header>
-        <p>
-            <img src="/images/alexwerffeli.jpg" alt="Alex Werffeli">
-        </p>
         <h1>Hi {{ document.company }}, {{ document.title }}</h1>
         <h2 class="header-blue">{{ document.subTitle }}</h2>
     </header>
-    </header>
 
     <section id="about">
-        {{ document.intro|striptags('<a>')|raw }}
+        <img class="portrait" src="/images/alexwerffeli.jpg" alt="Alex Werffeli">
+
+        {{ document.intro|striptags('<a>')|raw|nl2br }}
     </section>
 
     <section id="skillset">
