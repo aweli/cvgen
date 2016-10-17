@@ -12,10 +12,10 @@
     <div id="wrapper">
         <div class="container">
             <div class="col-md-6">
-                {{ form_start(form) }}
+                {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
 
-                <p class="bg-info">You'll be able to access your personal cv
-                    at <em>{{ url('candidacy', {'identifier' : 'example-identifier'}) }}</em></p>
+                <div class="alert alert-info" role="alert">Your webpage will be published at
+                    <em>{{ url('candidacy', {'identifier' : 'example-identifier'}) }}</em></div>
 
                 {{ form_row(form.identifier) }}
                 {{ form_row(form.firstName) }}
@@ -34,7 +34,7 @@
                     <a href="javascript:;" id="add-another-skill">Add skill</a>
                 </p>
 
-                <button type="submit" class="btn" title="Save">Save</button>
+                <button type="submit" class="btn btn-default" title="Save">Save</button>
 
                 {{ form_end(form) }}
             </div>

@@ -3,8 +3,10 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Range;
 
 class SkillType extends AbstractType
 {
@@ -16,7 +18,11 @@ class SkillType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('percentage');
+            ->add('percentage', NumberType::class, [
+                'constraints' => [
+                    new Range(['min' => 1, 'max' => 100]),
+                ],
+            ]);
     }
 
     /**

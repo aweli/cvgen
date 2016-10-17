@@ -56,11 +56,11 @@
         </div>
 
     </section>
-
-    <footer>
-        <p>
-            <sup>*</sup> {{ document.footnote|striptags('<a>')|raw }}
-        </p>
-    </footer>
-
+    {% if  document.footnote %}
+        <footer>
+            <p>
+                <sup>*</sup> {{ document.footnote|striptags('<a>')|raw }}
+            </p>
+        </footer>
+    {% endif %}
 {% endblock %}

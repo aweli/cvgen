@@ -3,9 +3,11 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class DocumentType extends AbstractType
 {
@@ -19,10 +21,30 @@ class DocumentType extends AbstractType
             ->add('company', TextType::class, [
                 'required' => false,
             ])
-            ->add('title')
-            ->add('subTitle')
-            ->add('intro')
-            ->add('outro')
+            ->add('title', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('subTitle', TextType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('intro', TextareaType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
+            ->add('outro', TextareaType::class, [
+                'required' => true,
+                'constraints' => [
+                    new NotBlank(),
+                ]
+            ])
             ->add('footnote')
             ->add('imageUrl');
     }
