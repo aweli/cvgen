@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="BAUP" default="install">
+    <property name="env" value="dev"/>
+    <property name="dir.app" value="${project.basedir}/app" />
+    <property name="dir.web" value="${project.basedir}/web" />
+    <property name="dir.src" value="${project.basedir}/src" />
+    <property name="dir.build" value="${project.basedir}/build" />
+
+    <target name="install" depends="composer-install, db, assets" />
+
+    <target name="composer-download">
+        <exec command="curl -sS https://getcomposer.org/installer | php"
+              checkreturn="true"
+              passthru="true"/>
+        <move file="composer.phar" tofile="composer" />
+        <exec command="chmod +x composer"
+              checkreturn="true"
+              passthru="true"/>
+    </target>
+
+    <target name="composer-install">
+        <if>
+            <available file="composer" type="file"/>
+            <then>
+                <exec
+                    command="php composer install"
+                    checkreturn="true"
+                    passthru="true"
+                    />
+            </then>
+            <else>
+                <exec
+                    command="composer install"
+                    checkreturn="true"
+                    passthru="true"
+                    />
+            </else>
+        </if>
+    </target>
+
+    <target name="db"
+            description="Creates DB">
+
+        <exec
+                command="bin/console doctrine:database:drop --env=dev --force"
+                checkreturn="false"
+                passthru="true"
+        />
+
+        <exec
+                command="bin/console doctrine:database:create --env=dev"
+                checkreturn="true"
+                passthru="true"
+        />
+
+        <exec
+                command="bin/console doctrine:schema:create --env=dev"
+                checkreturn="true"
+                passthru="true"
+        />
+
+    </target>
+
+    <target name="test" description="Run tests.">
+        <exec
+                command="bin/phpunit"
+                checkreturn="true"
+                passthru="true"
+                />
+    </target>
+
+    <target name="assets" description="Install all front end and admin assets.">
+        <exec
+                command="npm install"
+                checkreturn="true"
+                passthru="true"
+                />
+        <exec
+            command="grunt"
+            checkreturn="true"
+            passthru="true"
+            />
+    </target>
+
+</project>
