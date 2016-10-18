@@ -49,7 +49,7 @@ module.exports = function (grunt) {
         },
         watch: {
             styles: {
-                files: ['sass/**/*.{sass,scss}'],
+                files: ['app/Resources/sass/**/*.{sass,scss}'],
                 tasks: ['sass:dev'],
                 options: {
                     spawn: false
