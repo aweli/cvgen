@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% set document = candidacy.document %}
 
-{% block title %}Hi{% if document.company %} {{ document.company }}{% endif %}, {{ document.title }}{% endblock %}
+{% block title %}{{ candidacy.firstName }} {{ candidacy.lastName }}{% endblock %}
 
 {% block description %}{{ document.subTitle }}{% endblock %}
 
@@ -14,7 +14,7 @@
 
 {% block body %}
     <header>
-        <h1>Hi{% if document.company %} {{ document.company }}{% endif %}, {{ document.title }}</h1>
+        <h1>{{ document.title }}</h1>
         <h2 class="header-blue">{{ document.subTitle }}</h2>
     </header>
 
