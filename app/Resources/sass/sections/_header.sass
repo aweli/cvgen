@@ -1,5 +1,5 @@
 header
-  text-align: center
+  text-align: left
   margin-top: 40px
 
   +media('>phablet')
@@ -12,14 +12,12 @@ header
   h1
     margin-bottom: 8px
 
-h2.header-blue
-  color: $blue
-  font-size: 20px
-  line-height: 24px
+    &.header-blue
+      color: $blue
 
 +media('print')
   header:before
-    content: '(This is extract of my profile found at alexwerffeli.com)'
+    content: '(This is extract of my profile found at alexwerffe.li)'
     margin-bottom: 20px
     font-size: $small-font-size
     line-height: $small-line-height

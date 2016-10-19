@@ -2,7 +2,7 @@
   @for $i from 1 through 10
     .skill-level-#{$i}
       &:after
-        width: calc(#{percentage($i/10)} + 10px)
+        width: calc(#{percentage($i/10)} + 14px)
         @extend %skill-level-x-all
 
 @include skill-level-x
@@ -14,18 +14,21 @@
   // background: $blue
   // this a hack for upper thing if u want to print and have colors on printed version
   box-sizing: border-box
-  border: 5px solid $blue
+  border: 7px solid $blue
   position: absolute
-  top: -5px
-  left: -5px
+  top: -7px
+  left: -7px
 
 .skill-level-bar
   display: block
   height: 10px
   width: 100%
-  margin: 0 0 40px 0
+  margin: 0 0 35px 0
   //background: $gray
   // this a hack for upper thing if u want to print and have colors on printed version
   box-sizing: border-box
-  border: 5px solid $gray
+  border: 7px solid $gray
   position: relative
+
+  &:last-of-type
+    margin: 0
